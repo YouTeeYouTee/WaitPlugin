@@ -1,0 +1,9 @@
+name: WaitPlugin
+version: '1.1'
+main: fr.youtee.waitplugin.WaitPlugin
+api-version: '1.20'
+
+commands:
+  wait:
+    description: Commande pour la temporisation.
+    usage: /wait <seconds> <commands>
