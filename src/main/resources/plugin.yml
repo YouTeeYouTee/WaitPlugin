@@ -2,7 +2,7 @@ name: WaitPlugin
 version: '${project.version}'
 main: fr.youtee.waitplugin.WaitPlugin
 api-version: '1.20'
-author: Youtee
+authors: [Youtee, Uxzylon]
 description: Plugin pour temporiser des commandes.
 commands:
   wait:
