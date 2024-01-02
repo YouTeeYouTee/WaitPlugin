@@ -13,7 +13,7 @@ public class WaitCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // Vérifiez si la commande a été correctement utilisée
-        if (args.length != 2) {
+        if (args.length < 2) {
             sender.sendMessage("Utilisation : /wait <secondes> <commande>");
             return true;
         }
@@ -21,12 +21,15 @@ public class WaitCommand implements TabExecutor {
         try {
             int seconds = Integer.parseInt(args[0]);
 
+            // Prend chaque argument après le premier et les joint en une seule chaîne
+            String commandToRun = String.join(" ", args).substring(args[0].length() + 1);
+
             // Créez une tâche BukkitRunnable pour retarder l'exécution de la commande
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     // Exécutez la commande spécifiée après le délai
-                    sender.getServer().dispatchCommand(sender, args[1]);
+                    sender.getServer().dispatchCommand(sender, commandToRun);
                 }
             }.runTaskLater(plugin, seconds * 20L); // 20 ticks par seconde
 
