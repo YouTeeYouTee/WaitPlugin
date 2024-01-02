@@ -10,7 +10,7 @@ public final class WaitPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        this.getLogger().info("WaitPlugin 1.1 - Enabled!");
+        this.getLogger().info("Enabled!");
         getCommand("wait").setExecutor(new WaitCommand());
         // Plugin startup logic
     }
