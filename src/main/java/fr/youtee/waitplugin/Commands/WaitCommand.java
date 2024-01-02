@@ -6,6 +6,7 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Collections;
 import java.util.List;
 
 import static fr.youtee.waitplugin.WaitPlugin.plugin;
@@ -52,7 +53,12 @@ public class WaitCommand implements TabExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        // Pour l'instant tu peux juste mettre null et tu pourras le compléter après vu que c'est optionnel
-        return null;
+        Player player = (Player) sender;
+        if (args.length == 1) {
+            return Collections.singletonList("<secondes>");
+        } else if (args.length == 2) {
+            return Collections.singletonList("<commande>");
+        }
+        return Collections.emptyList();
     }
 }
