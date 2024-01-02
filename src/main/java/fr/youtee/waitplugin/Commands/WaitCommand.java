@@ -3,6 +3,7 @@ package fr.youtee.waitplugin.Commands;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
@@ -16,6 +17,14 @@ public class WaitCommand implements TabExecutor {
         if (args.length < 2) {
             sender.sendMessage("Utilisation : /wait <secondes> <commande>");
             return true;
+        }
+
+        // Si c'est un joueur, vérifiez qu'il a la permission d'utiliser la commande
+        if (sender instanceof Player player) {
+            if (!player.hasPermission("waitplugin.command")) {
+                player.sendMessage("Vous n'avez pas la permission d'utiliser cette commande.");
+                return true;
+            }
         }
 
         try {

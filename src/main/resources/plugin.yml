@@ -2,8 +2,19 @@ name: WaitPlugin
 version: '${project.version}'
 main: fr.youtee.waitplugin.WaitPlugin
 api-version: '1.20'
-
+author: Youtee
+description: Plugin pour temporiser des commandes.
 commands:
   wait:
     description: Commande pour la temporisation.
     usage: /wait <seconds> <commands>
+    permission: waitplugin.command
+permissions:
+    waitplugin.command:
+        description: Permet d'utiliser la commande /wait.
+        default: op
+        children:
+          waitplugin.*: true
+    waitplugin.*:
+        description: Permet d'utiliser toutes les commandes du plugin.
+        default: false
