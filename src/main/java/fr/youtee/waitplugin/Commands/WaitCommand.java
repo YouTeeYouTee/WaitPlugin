@@ -34,16 +34,22 @@ public class WaitCommand implements TabExecutor {
             // Prend chaque argument après le premier et les joint en une seule chaîne
             String commandToRun = String.join(" ", args).substring(args[0].length() + 1);
 
+            // Supprime le "/" au début de la commande si présent
+            if (commandToRun.startsWith("/")) {
+                commandToRun = commandToRun.substring(1);
+            }
+
             // Créez une tâche BukkitRunnable pour retarder l'exécution de la commande
+            String finalCommandToRun = commandToRun;
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     // Exécutez la commande spécifiée après le délai
-                    sender.getServer().dispatchCommand(sender, commandToRun);
+                    sender.getServer().dispatchCommand(sender, finalCommandToRun);
                 }
             }.runTaskLater(plugin, seconds * 20L); // 20 ticks par seconde
 
-            sender.sendMessage("La commande sera exécutée après " + seconds + " secondes.");
+            //sender.sendMessage("La commande sera exécutée après " + seconds + " secondes.");
         } catch (NumberFormatException e) {
             sender.sendMessage("Veuillez spécifier un nombre valide de secondes.");
         }
